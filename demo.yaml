@@ -80,15 +80,12 @@ components:
             1HourPriceChangeInPercentage:
               type: string
               description: The price change percentage in the last hour
-            1WeekPriceChangeInPercentage:
-              type: string
-              description: The price change percentage in the last week
             24HoursPriceChangeInPercentage:
               type: string
               description: The price change percentage in the last 24 hours
-            24HoursTradingVolume:
+            1WeekPriceChangeInPercentage:
               type: string
-              description: The trading volume in the last 24 hours
+              description: The price change percentage in the last week
             circulatingSupply:
               type: string
               description: The circulating supply of the asset
@@ -98,4 +95,7 @@ components:
             maxSupply:
               type: string
               description: The maximum supply of the asset
+            24HoursTradingVolume:
+              type: string
+              description: The trading volume in the last 24 hours
           description: Additional specific data about the asset
