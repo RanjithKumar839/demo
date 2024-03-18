@@ -5,7 +5,7 @@ info:
 servers:
   - url: https://rest.cryptoapis.io/v2
 paths:
-  /market-data/assets/assetId/{:assetId}:
+  /market-data/assets/assetId/{assetId}:
     parameters:
       - in: path
         name: assetId
