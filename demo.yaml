@@ -6,96 +6,130 @@ servers:
   - url: https://rest.cryptoapis.io/v2
 paths:
   /market-data/assets/assetId/630629da4e66ce0983f2cd4d:
-    # parameters:
-    #   - in: path
-    #     name: assetId
-    #     required: true
-    #     schema:
-    #       type: string
-    #     description: The ID of the asset
+    parameters:
+      - in: path
+        name: assetId
+        required: true
+        schema:
+          type: string
+        description: The ID of the asset
     get:
-      summary: Get information about a specific asset
-      description: Retrieve information about a specific asset identified by its ID
-      operationId: getAssetInfo
+      summary: Get information about Ethereum
+      description: Retrieve information about Ethereum identified by its ID
+      operationId: getEthereumInfo
       responses:
         '200':
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssetInfo'
+                $ref: '#/components/schemas/EthereumInfo'
+
 components:
   schemas:
-    AssetInfo:
+    APIResponse:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: The version of the API
+        requestId:
+          type: string
+          description: The unique identifier for the request
+
+    EthereumInfo:
+      allOf:
+        - $ref: '#/components/schemas/APIResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/EthereumData'
+
+    EthereumData:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/EthereumItem'
+
+    EthereumItem:
       type: object
       properties:
         assetId:
           type: string
-          description: The ID of the asset
+          description: The ID of Ethereum
         assetLogo:
-          type: object
-          properties:
-            encoding:
-              type: string
-              description: The encoding format of the image data
-            imageData:
-              type: string
-              format: byte
-              description: The image data of the asset logo encoded in base64
-            mimeType:
-              type: string
-              description: The MIME type of the image
-          description: The logo of the asset
+          $ref: '#/components/schemas/AssetLogo'
         assetName:
           type: string
-          description: The name of the asset
+          description: The name of Ethereum
         assetOriginalSymbol:
           type: string
-          description: The original symbol of the asset
+          description: The original symbol of Ethereum
         assetSymbol:
           type: string
-          description: The symbol of the asset
+          description: The symbol of Ethereum
         assetType:
           type: string
-          description: The type of the asset (e.g., crypto, coin)
+          description: The type of Ethereum (e.g., crypto, coin)
         latestRate:
-          type: object
-          properties:
-            amount:
-              type: string
-              description: The latest rate amount
-            calculationTimestamp:
-              type: integer
-              description: The timestamp when the rate was calculated
-            unit:
-              type: string
-              description: The unit of the rate (e.g., USD)
-          description: The latest rate of the asset
+          $ref: '#/components/schemas/LatestRate'
         slug:
           type: string
-          description: The slug of the asset
+          description: The slug of Ethereum
         specificData:
-          type: object
-          properties:
-            1HourPriceChangeInPercentage:
-              type: string
-              description: The price change percentage in the last hour
-            24HoursPriceChangeInPercentage:
-              type: string
-              description: The price change percentage in the last 24 hours
-            1WeekPriceChangeInPercentage:
-              type: string
-              description: The price change percentage in the last week
-            circulatingSupply:
-              type: string
-              description: The circulating supply of the asset
-            marketCapInUSD:
-              type: string
-              description: The market capitalization of the asset in USD
-            maxSupply:
-              type: string
-              description: The maximum supply of the asset
-            24HoursTradingVolume:
-              type: string
-              description: The trading volume in the last 24 hours
-          description: Additional specific data about the asset
+          $ref: '#/components/schemas/EthereumSpecificData'
+
+    AssetLogo:
+      type: object
+      properties:
+        encoding:
+          type: string
+          description: The encoding format of the image data
+        imageData:
+          type: string
+          format: byte
+          description: The image data of Ethereum's logo encoded in base64
+        mimeType:
+          type: string
+          description: The MIME type of the image
+
+    LatestRate:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: The latest rate amount of Ethereum
+        calculationTimestamp:
+          type: integer
+          description: The timestamp when the rate was calculated for Ethereum
+        unit:
+          type: string
+          description: The unit of the rate (e.g., USD)
+
+    EthereumSpecificData:
+      type: object
+      properties:
+        1HourPriceChangeInPercentage:
+          type: string
+          description: The price change percentage in the last hour for Ethereum
+        1WeekPriceChangeInPercentage:
+          type: string
+          description: The price change percentage in the last week for Ethereum
+        24HoursPriceChangeInPercentage:
+          type: string
+          description: The price change percentage in the last 24 hours for Ethereum
+        24HoursTradingVolume:
+          type: string
+          description: The trading volume in the last 24 hours for Ethereum
+        assetType:
+          type: string
+          description: The type of Ethereum (e.g., coin)
+        circulatingSupply:
+          type: string
+          description: The circulating supply of Ethereum
+        marketCapInUSD:
+          type: string
+          description: The market capitalization of Ethereum in USD
+        maxSupply:
+          type: string
+          description: The maximum supply of Ethereum
