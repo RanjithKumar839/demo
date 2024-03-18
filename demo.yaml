@@ -5,14 +5,14 @@ info:
 servers:
   - url: https://rest.cryptoapis.io/v2
 paths:
-  /market-data/assets/assetId/{assetId}:
-    parameters:
-      - in: path
-        name: assetId
-        required: true
-        schema:
-          type: string
-        description: The ID of the asset
+  /market-data/assets/assetId/630629da4e66ce0983f2cd4d:
+    # parameters:
+    #   - in: path
+    #     name: assetId
+    #     required: true
+    #     schema:
+    #       type: string
+    #     description: The ID of the asset
     get:
       summary: Get information about a specific asset
       description: Retrieve information about a specific asset identified by its ID
