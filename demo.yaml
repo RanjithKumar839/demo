@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: Crypto Market Data API
+  version: 1.0.0
+servers:
+  - url: https://rest.cryptoapis.io/v2
+paths:
+  /market-data/assets/assetId/{assetId}:
+    parameters:
+      - in: path
+        name: assetId
+        required: true
+        schema:
+          type: string
+        description: The ID of the asset
+    get:
+      summary: Get information about a specific asset
+      description: Retrieve information about a specific asset identified by its ID
+      operationId: getAssetInfo
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetInfo'
+components:
+  schemas:
+    AssetInfo:
+      type: object
+      properties:
+        assetId:
+          type: string
+          description: The ID of the asset
+        assetLogo:
+          type: object
+          properties:
+            encoding:
+              type: string
+              description: The encoding format of the image data
+            imageData:
+              type: string
+              format: byte
+              description: The image data of the asset logo encoded in base64
+            mimeType:
+              type: string
+              description: The MIME type of the image
+          description: The logo of the asset
+        assetName:
+          type: string
+          description: The name of the asset
+        assetOriginalSymbol:
+          type: string
+          description: The original symbol of the asset
+        assetSymbol:
+          type: string
+          description: The symbol of the asset
+        assetType:
+          type: string
+          description: The type of the asset (e.g., crypto, coin)
+        latestRate:
+          type: object
+          properties:
+            amount:
+              type: string
+              description: The latest rate amount
+            calculationTimestamp:
+              type: integer
+              description: The timestamp when the rate was calculated
+            unit:
+              type: string
+              description: The unit of the rate (e.g., USD)
+          description: The latest rate of the asset
+        slug:
+          type: string
+          description: The slug of the asset
+        specificData:
+          type: object
+          properties:
+            1HourPriceChangeInPercentage:
+              type: string
+              description: The price change percentage in the last hour
+            1WeekPriceChangeInPercentage:
+              type: string
+              description: The price change percentage in the last week
+            24HoursPriceChangeInPercentage:
+              type: string
+              description: The price change percentage in the last 24 hours
+            24HoursTradingVolume:
+              type: string
+              description: The trading volume in the last 24 hours
+            circulatingSupply:
+              type: string
+              description: The circulating supply of the asset
+            marketCapInUSD:
+              type: string
+              description: The market capitalization of the asset in USD
+            maxSupply:
+              type: string
+              description: The maximum supply of the asset
+          description: Additional specific data about the asset
